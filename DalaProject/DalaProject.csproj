@@ -37,16 +37,6 @@
     <None Remove="Services\Implementations\" />
     <None Remove="Profiles\" />
     <None Remove="DTOs\" />
-    <None Remove="Views\Account\" />
-    <None Remove="Views\Company\" />
-    <None Remove="Views\Ground\" />
-    <None Remove="Views\Product\" />
-    <None Remove="Views\Owner\" />
-    <None Remove="Views\Report\" />
-    <None Remove="Views\Dashboard\" />
-    <None Remove="Migrations\" />
-    <None Remove="Views\MarketProducts\" />
-    <None Remove="Views\Seasons\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -58,14 +48,15 @@
     <Folder Include="DTOs\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Company\" />
-    <Folder Include="Views\Ground\" />
-    <Folder Include="Views\Product\" />
-    <Folder Include="Views\Owner\" />
-    <Folder Include="Views\Report\" />
-    <Folder Include="Views\Dashboard\" />
-    <Folder Include="Migrations\" />
-    <Folder Include="Views\MarketProducts\" />
-    <Folder Include="Views\Seasons\" />
+   <Folder Include="Views\Ground\" />
+   <Folder Include="Views\Home\" />
+   <Folder Include="Views\Shared\" />
+   <Folder Include="Views\MarketProducts\" />
+   <Folder Include="Views\Product\" />
+   <Folder Include="Views\Owner\" />
+   <Folder Include="Views\Report\" />
+   <Folder Include="Views\Seasons\" />
+   <Folder Include="Views\Dashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Company\Details.cshtml" />
