@@ -1,0 +1,21 @@
+﻿@model DalaProject.Models.Report
+@{
+    ViewData["Title"] = "Детали отчёта";
+}
+
+<h2>Детали отчёта</h2>
+
+<div class="card shadow p-4">
+    <h4>Фермер: @Model.Fermer?.FullName</h4>
+    <p><strong>Сезон:</strong> @Model.Season?.Name</p>
+    <p><strong>Доход:</strong> @Model.Income</p>
+    <p><strong>Расходы:</strong> @Model.Expenses</p>
+    <p><strong>Произведено:</strong> @Model.QuantityProduced</p>
+    <p><strong>Продано:</strong> @Model.QuantitySold</p>
+    <p><strong>Дата создания:</strong> @Model.CreatedAt</p>
+
+    <div class="d-flex gap-2 mt-3">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Изменить</a>
+        <a asp-action="Index" class="btn btn-secondary">Назад</a>
+    </div>
+</div>

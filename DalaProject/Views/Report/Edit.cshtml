@@ -1,0 +1,17 @@
+﻿@model DalaProject.Models.Report
+@{
+    ViewData["Title"] = "Создать/Редактировать отчёт";
+}
+<h2>@ViewData["Title"]</h2>
+<form asp-action="@(Model?.Id == 0 ? "Create" : "Edit")" method="post">
+    <div class="mb-3"><label asp-for="Income"></label><input asp-for="Income" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="Expenses"></label><input asp-for="Expenses" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="QuantityProduced"></label><input asp-for="QuantityProduced" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="QuantitySold"></label><input asp-for="QuantitySold" class="form-control" /></div>
+    <div class="mb-3">
+        <label>Сезон</label>
+        <select asp-for="SeasonId" asp-items="ViewBag.SeasonId" class="form-select"></select>
+    </div>
+    <button class="btn btn-success">Сохранить</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

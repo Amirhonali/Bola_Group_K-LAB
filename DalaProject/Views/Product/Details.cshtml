@@ -1,0 +1,10 @@
+﻿@model DalaProject.Models.Product
+@{
+    ViewData["Title"] = "Детали продукта";
+}
+<h2>@Model.Title</h2>
+<p>Категория: @Model.Category</p>
+<p>Описание: @Model.Description</p>
+<p>Фермер: @Model.Fermer?.FullName</p>
+<p>Сезон: @Model.Season?.Name</p>
+<a asp-action="Index" class="btn btn-secondary">Назад</a>>

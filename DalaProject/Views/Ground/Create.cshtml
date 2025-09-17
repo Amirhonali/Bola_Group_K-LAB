@@ -1,0 +1,12 @@
+﻿@model DalaProject.Models.Ground
+<h2>Добавить участок</h2>
+<form asp-action="Create" method="post">
+    <div class="mb-3"><label asp-for="Location"></label><input asp-for="Location" class="form-control" /></div>
+    <div class="mb-3"><label asp-for="Area"></label><input asp-for="Area" class="form-control" /></div>
+    <div class="mb-3">
+        <label>Компания</label>
+        <select asp-for="CompanyId" asp-items="ViewBag.CompanyId" class="form-select"></select>
+    </div>
+    <button class="btn btn-success">Сохранить</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

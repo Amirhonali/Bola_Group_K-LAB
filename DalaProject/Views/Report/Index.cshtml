@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DalaProject.Models.Report>
+@{
+    ViewData["Title"] = "Отчёты";
+}
+<h2>Отчёты</h2>
+<a asp-action="Create" class="btn btn-primary">Добавить отчёт</a>
+<table class="table table-bordered mt-3">
+    <thead><tr><th>Доход</th><th>Расход</th><th>Произв.</th><th>Продано</th><th>Сезон</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Income</td>
+                <td>@r.Expenses</td>
+                <td>@r.QuantityProduced</td>
+                <td>@r.QuantitySold</td>
+                <td>@r.Season?.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@r.Id" class="btn btn-warning btn-sm">Изм.</a>
+                    <a asp-action="Delete" asp-route-id="@r.Id" class="btn btn-danger btn-sm">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<canvas id="reportChart" width="600" height="300"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('reportChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Select(m => m.Season?.Name ?? "Без сезона"))),
+            datasets: [
+                {
+                    label: 'Доходы',
+                    data: @Html.Raw(Json.Serialize(Model.Select(m => m.Income))),
+                    borderColor: 'green',
+                    fill: false
+                },
+                {
+                    label: 'Расходы',
+                    data: @Html.Raw(Json.Serialize(Model.Select(m => m.Expenses))),
+                    borderColor: 'red',
+                    fill: false
+                }
+            ]
+        }
+    });
+</script>

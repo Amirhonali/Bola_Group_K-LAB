@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DalaProject.Models.Ground>
+@{
+    ViewData["Title"] = "Земли";
+}
+<h2>Земли</h2>
+<p><a asp-action="Create" class="btn btn-primary">Добавить землю</a></p>
+<table class="table table-striped">
+    <thead><tr><th>Локация</th><th>Площадь</th><th>Компания</th><th>Фермер</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var g in Model)
+        {
+            <tr>
+                <td>@g.Location</td>
+                <td>@g.Area</td>
+                <td>@g.Company?.Name</td>
+                <td>@g.Fermer?.FullName ?? "Не назначен"</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@g.Id" class="btn btn-sm btn-info">Открыть</a>
+                    <a asp-action="Edit" asp-route-id="@g.Id" class="btn btn-sm btn-secondary">Редактировать</a>
+                    <a asp-action="Delete" asp-route-id="@g.Id" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

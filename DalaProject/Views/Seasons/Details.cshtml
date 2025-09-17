@@ -1,0 +1,8 @@
+﻿@model DalaProject.Models.Season
+<h2>Удалить сезон</h2>
+<p>Вы уверены, что хотите удалить "@Model.Name"?</p>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Удалить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

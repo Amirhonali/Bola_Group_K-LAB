@@ -1,0 +1,17 @@
+﻿@model DalaProject.Models.Company
+@{
+    ViewData["Title"] = "Создать/Редактировать компанию";
+}
+<h2>@ViewData["Title"]</h2>
+<form asp-action="@(Model?.Id == 0 ? "Create" : "Edit")" method="post">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Владелец</label>
+        <select asp-for="OwnerId" asp-items="ViewBag.OwnerId" class="form-select"></select>
+    </div>
+    <button class="btn btn-success">Сохранить</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

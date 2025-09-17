@@ -1,0 +1,20 @@
+﻿@model IEnumerable<DalaProject.Models.Company>
+<h2>Компании</h2>
+<a asp-action="Create" class="btn btn-primary">Добавить компанию</a>
+<table class="table table-striped mt-3">
+    <thead><tr><th>Название</th><th>Владелец</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Name</td>
+                <td>@c.Owner?.FullName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-warning btn-sm">Изм.</a>
+                    <a asp-action="Details" asp-route-id="@c.Id" class="btn btn-info btn-sm">Подробнее</a>
+                    <a asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger btn-sm">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

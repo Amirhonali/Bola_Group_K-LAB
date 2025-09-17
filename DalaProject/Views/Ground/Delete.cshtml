@@ -1,0 +1,11 @@
+﻿@model DalaProject.Models.Ground
+@{
+    ViewData["Title"] = "Удалить землю";
+}
+<h2>Удалить землю</h2>
+<p>Вы уверены, что хотите удалить землю "@Model.Location"?</p>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Удалить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

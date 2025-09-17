@@ -1,0 +1,11 @@
+﻿@model DalaProject.Models.Product
+@{
+    ViewData["Title"] = "Удалить продукт";
+}
+<h2>Удалить продукт</h2>
+<p>Вы уверены, что хотите удалить "@Model.Title"?</p>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Удалить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

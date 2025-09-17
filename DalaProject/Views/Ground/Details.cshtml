@@ -1,0 +1,24 @@
+﻿@model DalaProject.Models.Ground
+@{
+    ViewData["Title"] = "Детали земли";
+}
+<h2>@Model.Location</h2>
+<p>Площадь: @Model.Area гa</p>
+<p>Компания: @Model.Company?.Name</p>
+<p>Фермер: @Model.Fermer?.FullName ?? "Не назначен"</p>
+<h4>Сезоны</h4>
+<table class="table">
+    <thead><tr><th>Название</th><th>Начало</th><th>Конец</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var s in Model.Seasons)
+        {
+            <tr>
+                <td>@s.Name</td>
+                <td>@s.StartDate.ToShortDateString()</td>
+                <td>@(s.EndDate?.ToShortDateString() ?? "—")</td>
+                <td><a asp-controller="Seasons" asp-action="Details" asp-route-id="@s.Id" class="btn btn-sm btn-info">Открыть</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Index" class="btn btn-secondary">Назад</a>
