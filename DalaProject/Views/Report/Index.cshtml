@@ -1,23 +1,42 @@
-﻿@model IEnumerable<DalaProject.Models.Report>
+﻿@using System.Security.Claims
+@model IEnumerable<DalaProject.Models.Report>
 @{
     ViewData["Title"] = "Отчёты";
 }
 <h2>Отчёты</h2>
-<a asp-action="Create" class="btn btn-primary">Добавить отчёт</a>
-<table class="table table-bordered mt-3">
-    <thead><tr><th>Доход</th><th>Расход</th><th>Произв.</th><th>Продано</th><th>Сезон</th><th></th></tr></thead>
+
+@{
+    var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    int currentUserId = !string.IsNullOrEmpty(userIdClaim) ? int.Parse(userIdClaim) : 0;
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Fermer</th>
+            <th>Season</th>
+            <th>Product</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
     <tbody>
-        @foreach (var r in Model)
+        @foreach (var report in Model)
         {
             <tr>
-                <td>@r.Income</td>
-                <td>@r.Expenses</td>
-                <td>@r.QuantityProduced</td>
-                <td>@r.QuantitySold</td>
-                <td>@r.Season?.Name</td>
+                <td>@report.Income</td>
+                <td>@report.Fermer?.FullName</td>
+                <td>@report.Season?.Name</td>
+                <td>@report.Product?.Title</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@r.Id" class="btn btn-warning btn-sm">Изм.</a>
-                    <a asp-action="Delete" asp-route-id="@r.Id" class="btn btn-danger btn-sm">Удалить</a>
+                    <a asp-action="Details" asp-route-id="@report.Id">Details</a>
+                    @if (User.IsInRole("Fermer") && report.FermerId == currentUserId)
+                    {
+                        <span> | </span>
+                        <a asp-action="Edit" asp-route-id="@report.Id">Edit</a>
+                        <span> | </span>
+                        <a asp-action="Delete" asp-route-id="@report.Id">Delete</a>
+                    }
                 </td>
             </tr>
         }

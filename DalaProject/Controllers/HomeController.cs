@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DalaProject.Models;
 using DalaProject.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DalaProject.Controllers
 {
@@ -24,6 +25,18 @@ namespace DalaProject.Controllers
                 .ToListAsync();
 
             return View(products);
+        }
+
+        [Authorize(Roles = "Owner")]
+        public IActionResult OwnerDashboard()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Fermer")]
+        public IActionResult FermerDashboard()
+        {
+            return View();
         }
     }
 }

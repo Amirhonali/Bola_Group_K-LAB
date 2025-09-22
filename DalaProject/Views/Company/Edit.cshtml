@@ -1,17 +1,34 @@
 ﻿@model DalaProject.Models.Company
+
 @{
-    ViewData["Title"] = "Создать/Редактировать компанию";
+    ViewData["Title"] = "Edit Company";
 }
-<h2>@ViewData["Title"]</h2>
-<form asp-action="@(Model?.Id == 0 ? "Create" : "Edit")" method="post">
+
+<h2>Edit Company</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
     <div class="mb-3">
         <label asp-for="Name" class="form-label"></label>
         <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
+
     <div class="mb-3">
-        <label>Владелец</label>
-        <select asp-for="OwnerId" asp-items="ViewBag.OwnerId" class="form-select"></select>
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-    <button class="btn btn-success">Сохранить</button>
-    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+    <div class="form-group">
+        <label>Картинка</label>
+        <input type="file" name="imageFile" class="form-control" />
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" width="150" />
+        }
+    </div>
+    <input type="hidden" asp-for="OwnerId" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>

@@ -1,0 +1,41 @@
+@model DalaProject.Models.User
+
+@{
+    ViewData["Title"] = "Профиль";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Мой профиль</h2>
+
+    <div class="card shadow-sm p-3">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="~/@Model.ImageUrl" alt="Аватар" class="img-thumbnail mb-2" style="max-width:200px;" />
+                }
+                else
+                {
+                    <img src="~/Images/default-user.png" alt="Нет фото" class="img-thumbnail mb-2" style="max-width:200px;" />
+                }
+                <a asp-action="Edit" class="btn btn-sm btn-primary mt-2">Редактировать</a>
+            </div>
+
+            <div class="col-md-9">
+                <dl class="row">
+                    <dt class="col-sm-3">ФИО:</dt>
+                    <dd class="col-sm-9">@Model.FullName</dd>
+
+                    <dt class="col-sm-3">Email:</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+
+                    <dt class="col-sm-3">Телефон:</dt>
+                    <dd class="col-sm-9">@Model.Phone</dd>
+
+                    <dt class="col-sm-3">Роль:</dt>
+                    <dd class="col-sm-9">@Model.Role</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

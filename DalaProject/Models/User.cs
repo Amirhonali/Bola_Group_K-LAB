@@ -10,7 +10,7 @@ public class User
     public string Email { get; set; } = null!;
     public string PasswordHash { get; set; } = null!;
     public string Role { get; set; } = null!; // "Owner" или "Fermer"
-
+    public string? ImageUrl { get; set; }
     public ICollection<OwnerFermer> Owners { get; set; } = new List<OwnerFermer>();
     public ICollection<OwnerFermer> Fermers { get; set; } = new List<OwnerFermer>();
     public ICollection<MarketProduct> MarketProducts { get; set; } = new List<MarketProduct>();

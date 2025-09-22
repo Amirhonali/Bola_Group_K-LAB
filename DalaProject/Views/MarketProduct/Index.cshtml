@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DalaProject.Models.MarketProduct>
+@{
+    ViewData["Title"] = "Market";
+}
+
+<h2>Market</h2>
+
+<div class="mb-3">
+    <a asp-action="Index" asp-route-sortOrder="latest" class="btn btn-outline-primary">Latest</a>
+    <a asp-action="Index" asp-route-sortOrder="price_asc" class="btn btn-outline-primary">Price ↑</a>
+    <a asp-action="Index" asp-route-sortOrder="price_desc" class="btn btn-outline-primary">Price ↓</a>
+    <a asp-action="Index" asp-route-sortOrder="category" class="btn btn-outline-primary">Category</a>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Fermer</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var mp in Model)
+    {
+        <tr>
+            <td>
+                <img src="@mp.Product?.ImageUrl" alt="@mp.Product?.Title" width="100" />
+            </td>
+            <td>@mp.Product?.Title</td>
+            <td>@mp.Product?.Category</td>
+            <td>@mp.Price</td>
+            <td>
+                @mp.Fermer?.FullName <br />
+                @mp.Fermer?.Email <br />
+                @mp.Fermer?.Phone
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@mp.Id">Details</a>
+                @if(User.IsInRole("Fermer") && mp.FermerId == int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value))
+                {
+                    @: | <a asp-action="Edit" asp-route-id="@mp.Id">Edit</a>
+                    @: | <a asp-action="Delete" asp-route-id="@mp.Id">Delete</a>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

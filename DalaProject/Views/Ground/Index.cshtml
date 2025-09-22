@@ -1,25 +1,45 @@
 ﻿@model IEnumerable<DalaProject.Models.Ground>
+
 @{
-    ViewData["Title"] = "Земли";
+    ViewData["Title"] = "Мои Земли";
 }
-<h2>Земли</h2>
-<p><a asp-action="Create" class="btn btn-primary">Добавить землю</a></p>
-<table class="table table-striped">
-    <thead><tr><th>Локация</th><th>Площадь</th><th>Компания</th><th>Фермер</th><th></th></tr></thead>
-    <tbody>
-        @foreach (var g in Model)
-        {
-            <tr>
-                <td>@g.Location</td>
-                <td>@g.Area</td>
-                <td>@g.Company?.Name</td>
-                <td>@g.Fermer?.FullName ?? "Не назначен"</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@g.Id" class="btn btn-sm btn-info">Открыть</a>
-                    <a asp-action="Edit" asp-route-id="@g.Id" class="btn btn-sm btn-secondary">Редактировать</a>
-                    <a asp-action="Delete" asp-route-id="@g.Id" class="btn btn-sm btn-danger">Удалить</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@using System.Security.Claims
+@{
+    var role = User.FindFirstValue(ClaimTypes.Role);
+}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Мои Земли</h2>
+    @if (role == "Owner")
+    {
+        <a asp-action="Create" class="btn btn-success mb-3">Добавить Землю</a>
+    }
+</div>
+
+<div class="row">
+    @foreach (var ground in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden position-relative">
+                <a asp-action="Details" asp-route-id="@ground.Id" class="text-decoration-none">
+                    <div class="card-img" style="background-image: url('@(string.IsNullOrEmpty(ground.ImageUrl) ? "/Images/Dashboard/ground-bg.jpg" : "/" + ground.ImageUrl)'); 
+                                            background-size: cover; 
+                                            background-position: center; 
+                                            height: 200px;">
+                    </div>
+                    <div class="card-body text-center bg-dark bg-opacity-50 text-white position-absolute bottom-0 w-100">
+                        <h5 class="fw-bold">@ground.Location</h5>
+                    </div>
+                </a>
+
+                <!-- Кнопка редактировать -->
+                @if (role == "Owner")
+                {
+                    <a asp-action="Edit" asp-route-id="@ground.Id"
+                        class="btn btn-sm btn-light position-absolute top-0 end-0 m-2 rounded-circle shadow">
+                        ✏️
+                    </a>
+                }
+            </div>
+        </div>
+    }
+</div>

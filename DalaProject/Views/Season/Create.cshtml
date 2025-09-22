@@ -1,0 +1,38 @@
+﻿@model DalaProject.Models.Season
+
+@{
+    ViewData["Title"] = "Создать сезон";
+}
+
+<h2>Создать сезон</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate" class="form-control" type="date" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate"></label>
+        <input asp-for="EndDate" class="form-control" type="date" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GroundId" class="control-label"></label>
+        <select asp-for="GroundId" asp-items="@(new SelectList(ViewBag.Grounds, "Id", "Location"))" class="form-control">
+             <option value="">-- Выберите землю --</option>
+        </select>
+        <span asp-validation-for="GroundId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Создать</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

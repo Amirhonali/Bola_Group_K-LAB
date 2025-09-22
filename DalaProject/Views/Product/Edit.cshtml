@@ -1,19 +1,48 @@
 ﻿@model DalaProject.Models.Product
-@{
-    ViewData["Title"] = "Создать продукт";
-}
-<h2>@ViewData["Title"]</h2>
 
-<form asp-action="Create" method="post">
-    <div class="mb-3">
-        <label asp-for="Title" class="form-label"></label>
+@{
+    ViewData["Title"] = "Редактировать продукт";
+}
+
+<h2>Редактировать продукт</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label"></label>
+
+    <div class="form-group">
+        <label asp-for="Category"></label>
+        <input asp-for="Category" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control"></textarea>
     </div>
+
+    <div class="form-group">
+        <label>Сезон</label>
+        <select asp-for="SeasonId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Seasons, "Id", "Name"))"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Текущее фото</label><br />
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="~/@Model.ImageUrl" alt="Фото" width="150" />
+        }
+    </div>
+
+    <div class="form-group">
+        <label>Новое фото</label>
+        <input type="file" name="imageFile" class="form-control" />
+    </div>
+
     <button type="submit" class="btn btn-primary">Сохранить</button>
-    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
 </form>

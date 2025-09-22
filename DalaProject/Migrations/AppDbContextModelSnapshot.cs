@@ -34,6 +34,9 @@ namespace DalaProject.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -65,6 +68,9 @@ namespace DalaProject.Migrations
                     b.Property<int?>("FermerId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("text");
@@ -86,19 +92,12 @@ namespace DalaProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("FermerId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("text");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -175,6 +174,9 @@ namespace DalaProject.Migrations
                     b.Property<int>("FermerId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
+
                     b.Property<int>("SeasonId")
                         .HasColumnType("integer");
 
@@ -230,6 +232,10 @@ namespace DalaProject.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<decimal>("Expenses")
                         .HasColumnType("numeric");
 
@@ -238,6 +244,9 @@ namespace DalaProject.Migrations
 
                     b.Property<decimal>("Income")
                         .HasColumnType("numeric");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
 
                     b.Property<double>("QuantityProduced")
                         .HasColumnType("double precision");
@@ -248,9 +257,15 @@ namespace DalaProject.Migrations
                     b.Property<int>("SeasonId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FermerId");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("SeasonId");
 
@@ -299,6 +314,9 @@ namespace DalaProject.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
@@ -426,6 +444,12 @@ namespace DalaProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DalaProject.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DalaProject.Models.Season", "Season")
                         .WithMany("Reports")
                         .HasForeignKey("SeasonId")
@@ -433,6 +457,8 @@ namespace DalaProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Fermer");
+
+                    b.Navigation("Product");
 
                     b.Navigation("Season");
                 });

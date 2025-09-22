@@ -9,9 +9,9 @@ public class Ground
     public int Id { get; set; }
     public string Location { get; set; } = null!;
     public double Area { get; set; } // площадь земли в гектарах
-
+    public string? ImageUrl { get; set; }
     public int CompanyId { get; set; }
-    public Company Company { get; set; } = null!;
+    public Company? Company { get; set; } = null!;
 
     public int? FermerId { get; set; } // кто смотрит за землей
     public User? Fermer { get; set; }

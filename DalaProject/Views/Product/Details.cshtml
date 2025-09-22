@@ -1,10 +1,25 @@
 ﻿@model DalaProject.Models.Product
+
 @{
     ViewData["Title"] = "Детали продукта";
 }
-<h2>@Model.Title</h2>
-<p>Категория: @Model.Category</p>
-<p>Описание: @Model.Description</p>
-<p>Фермер: @Model.Fermer?.FullName</p>
-<p>Сезон: @Model.Season?.Name</p>
-<a asp-action="Index" class="btn btn-secondary">Назад</a>>
+
+<h2>Детали продукта</h2>
+
+<div>
+    <h4>@Model.Title</h4>
+    <p><strong>Категория:</strong> @Model.Category</p>
+    <p><strong>Описание:</strong> @Model.Description</p>
+    <p><strong>Сезон:</strong> @Model.Season?.Name</p>
+    <p><strong>Фермер:</strong> @Model.Fermer?.FullName</p>
+
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <img src="~/@Model.ImageUrl" alt="Фото" width="250" />
+    }
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Изменить</a>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</p>

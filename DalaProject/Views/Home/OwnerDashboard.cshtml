@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Личный кабинет владельца";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-5">👑 Личный кабинет владельца</h2>
+
+    <div class="row justify-content-center">
+        <!-- Мои компании -->
+        <div class="col-md-8 mb-4">
+            <a asp-controller="Company" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="card-img" style="background-image: url('/Images/Dashboard/company-bg.jpg'); background-size: cover; background-position: center; height: 200px;">
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="fw-bold">Мои Компании</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Мои земли -->
+        <div class="col-md-8 mb-4">
+            <a asp-controller="Ground" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="card-img" style="background-image: url('/Images/Dashboard/ground-bg.jpg'); background-size: cover; background-position: center; height: 200px;">
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="fw-bold">Мои Земли</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Отчёты -->
+        <div class="col-md-8 mb-4">
+            <a asp-controller="Report" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="card-img" style="background-image: url('/Images/Dashboard/report-bg.jpg'); background-size: cover; background-position: center; height: 200px;">
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="fw-bold">Отчёты</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

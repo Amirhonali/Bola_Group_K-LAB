@@ -1,24 +1,86 @@
 ﻿@model DalaProject.Models.Company
+
 @{
     ViewData["Title"] = "Детали компании";
 }
-<h2>@Model.Name</h2>
-<p><strong>Описание:</strong> @Model.Description</p>
-<p><strong>Владелец:</strong> @Model.Owner?.FullName</p>
 
-<h4>Участки (Grounds)</h4>
-@if (Model.Grounds != null && Model.Grounds.Any())
-{
-    <ul class="list-group">
-        @foreach (var g in Model.Grounds)
-        {
-            <li class="list-group-item">@g.Name (@g.Size га)</li>
-        }
-    </ul>
-}
-else
-{
-    <p><em>Нет участков</em></p>
-}
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">@Model.Name</h2>
 
-<a asp-action="Index" class="btn btn-secondary mt-3">Назад</a>
+    <div class="row">
+        <!-- Левая часть: картинка -->
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="~/@Model.ImageUrl" alt="Логотип компании" class="img-fluid rounded shadow-sm" />
+            }
+            else
+            {
+                <div class="border rounded p-4 text-muted text-center">
+                    <i class="bi bi-building" style="font-size: 3rem;"></i>
+                    <p>Нет изображения</p>
+                </div>
+            }
+        </div>
+
+        <!-- Правая часть: инфо -->
+        <div class="col-md-8">
+            <h4>Описание</h4>
+            <p class="text-muted">@Model.Description</p>
+
+            <h5 class="mt-4">Владелец</h5>
+            @if (Model.Owner != null)
+            {
+                <p>
+                    <strong>@Model.Owner.FullName</strong>
+                    <span class="text-muted">(@Model.Owner.Email)</span>
+                </p>
+            }
+            else
+            {
+                <p class="text-danger">Владелец не назначен</p>
+            }
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <!-- Grounds -->
+    <h4>Участки</h4>
+    @if (Model.Grounds != null && Model.Grounds.Any())
+    {
+        <table class="table table-bordered table-striped mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Локация</th>
+                    <th>Фермер</th>
+                    <th>Площадь</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ground in Model.Grounds)
+                {
+                    <tr>
+                        <td>@ground?.Location</td>
+                        <td>@(ground?.Fermer != null ? ground.Fermer.FullName : "Не назначен")</td>
+                        <td>@ground?.Area м²</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">Нет участков</p>
+    }
+
+    <!-- Кнопки -->
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Редактировать</a>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="mt-3">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary">Назад к списку</a>
+    </div>
+
+</div>

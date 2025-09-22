@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DalaProject.Models.Season>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject IHttpContextAccessor HttpContextAccessor
+
+<h2>Сезоны</h2>
+
+@{
+    var userRole = HttpContextAccessor.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+}
+
+@if (userRole == "Fermer")
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Создать сезон</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Дата начала</th>
+            <th>Дата окончания</th>
+            <th>Земля</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var season in Model)
+{
+        <tr>
+            <td>@season.Name</td>
+            <td>@season.StartDate.ToShortDateString()</td>
+            <td>@season.EndDate?.ToShortDateString()</td>
+            <td>@season.Ground?.Location</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@season.Id" class="btn btn-info btn-sm">Детали</a>
+                
+                @if (userRole == "Fermer")
+                {
+                    <a asp-action="Edit" asp-route-id="@season.Id" class="btn btn-warning btn-sm">Редактировать</a>
+                    <a asp-action="Delete" asp-route-id="@season.Id" class="btn btn-danger btn-sm">Удалить</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

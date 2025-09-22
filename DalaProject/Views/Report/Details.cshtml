@@ -1,21 +1,34 @@
 ﻿@model DalaProject.Models.Report
 @{
-    ViewData["Title"] = "Детали отчёта";
+    ViewData["Title"] = "Report Details";
 }
 
-<h2>Детали отчёта</h2>
+<h1>Report Details</h1>
 
-<div class="card shadow p-4">
-    <h4>Фермер: @Model.Fermer?.FullName</h4>
-    <p><strong>Сезон:</strong> @Model.Season?.Name</p>
-    <p><strong>Доход:</strong> @Model.Income</p>
-    <p><strong>Расходы:</strong> @Model.Expenses</p>
-    <p><strong>Произведено:</strong> @Model.QuantityProduced</p>
-    <p><strong>Продано:</strong> @Model.QuantitySold</p>
-    <p><strong>Дата создания:</strong> @Model.CreatedAt</p>
-
-    <div class="d-flex gap-2 mt-3">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Изменить</a>
-        <a asp-action="Index" class="btn btn-secondary">Назад</a>
-    </div>
+<div class="card p-3 mb-3">
+    <h3>@Model.Income</h3>
+    <p>@Model.Description</p>
 </div>
+
+<div class="card p-3 mb-3">
+    <h4>Fermer Information</h4>
+    <p><strong>Name:</strong> @Model.Fermer.FullName</p>
+    <p><strong>Email:</strong> @Model.Fermer.Email</p>
+</div>
+
+<div class="card p-3 mb-3">
+    <h4>Season Information</h4>
+    <p><strong>Title:</strong> @Model.Season.Name</p>
+    <p><strong>Start Date:</strong> @Model.Season.StartDate.ToShortDateString()</p>
+    <p><strong>End Date:</strong> @(Model.Season.EndDate?.ToShortDateString() ?? "N/A")</p>
+</div>
+
+<div class="card p-3 mb-3">
+    <h4>Product Information</h4>
+    <p><strong>Name:</strong> @Model.Product.Title</p>
+    <p><strong>Description:</strong> @Model.Product.Description</p>
+</div>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</p>

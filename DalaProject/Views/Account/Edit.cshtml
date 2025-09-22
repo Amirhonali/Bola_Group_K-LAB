@@ -1,0 +1,49 @@
+@model DalaProject.Models.User
+
+@{
+    ViewData["Title"] = "Редактировать профиль";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Редактировать профиль</h2>
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div class="form-group mb-3">
+            <label asp-for="FullName" class="form-label"></label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Phone" class="form-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Текущая картинка</label><br />
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="~/@Model.ImageUrl" alt="Аватар" class="img-thumbnail mb-2" style="max-width:150px;" />
+            }
+            else
+            {
+                <p><i>Нет картинки</i></p>
+            }
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="imageFile">Загрузить новую картинку</label>
+            <input type="file" name="imageFile" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a asp-action="Profile" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>

@@ -21,5 +21,6 @@ namespace DalaProject.Models.ViewModels
 
         [Required, Compare("Password")]
         public string ConfirmPassword { get; set; } = null!;
+        public IFormFile? ImageFile { get; set; }
     }
 }

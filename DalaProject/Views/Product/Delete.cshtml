@@ -1,11 +1,25 @@
 ﻿@model DalaProject.Models.Product
+
 @{
     ViewData["Title"] = "Удалить продукт";
 }
+
 <h2>Удалить продукт</h2>
-<p>Вы уверены, что хотите удалить "@Model.Title"?</p>
-<form asp-action="Delete" method="post">
+
+<h4>Вы уверены, что хотите удалить этот продукт?</h4>
+
+<div>
+    <h4>@Model.Title</h4>
+    <p><strong>Категория:</strong> @Model.Category</p>
+    <p><strong>Сезон:</strong> @Model.Season?.Name</p>
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <img src="~/@Model.ImageUrl" alt="Фото" width="200" />
+    }
+</div>
+
+<form asp-action="Delete">
     <input type="hidden" asp-for="Id" />
-    <button class="btn btn-danger">Удалить</button>
+    <button type="submit" class="btn btn-danger">Удалить</button>
     <a asp-action="Index" class="btn btn-secondary">Отмена</a>
 </form>

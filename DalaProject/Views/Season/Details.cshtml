@@ -1,0 +1,17 @@
+﻿@model DalaProject.Models.Season
+
+@{
+    ViewData["Title"] = "Детали сезона";
+}
+
+<h2>@Model.Name</h2>
+
+<div class="card p-3">
+    <p><strong>Дата начала:</strong> @Model.StartDate.ToShortDateString()</p>
+    <p><strong>Дата окончания:</strong> @(Model.EndDate?.ToShortDateString() ?? "Не указана")</p>
+    <p><strong>Поле:</strong> @Model.Ground.Location</p>
+</div>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</p>

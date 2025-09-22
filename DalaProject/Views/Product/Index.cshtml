@@ -1,25 +1,44 @@
 ﻿@model IEnumerable<DalaProject.Models.Product>
+
 @{
-    ViewData["Title"] = "Продукты";
+    ViewData["Title"] = "Мои продукты";
 }
-<h2>Продукты</h2>
-<p><a asp-action="Create" class="btn btn-primary">Добавить продукт</a></p>
-<table class="table table-striped">
-    <thead><tr><th>Название</th><th>Категория</th><th>Сезон</th><th>Фермер</th><th></th></tr></thead>
+
+<h2>Мои продукты</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Добавить продукт</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Категория</th>
+            <th>Сезон</th>
+            <th></th>
+        </tr>
+    </thead>
     <tbody>
-        @foreach (var p in Model)
-        {
-            <tr>
-                <td>@p.Title</td>
-                <td>@p.Category</td>
-                <td>@p.Season?.Name</td>
-                <td>@p.Fermer?.FullName</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-sm btn-info">Открыть</a>
-                    <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-secondary">Редактировать</a>
-                    <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-danger">Удалить</a>
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="~/@item.ImageUrl" alt="Фото" width="100" />
+                }
+            </td>
+            <td>@item.Title</td>
+            <td>@item.Category</td>
+            <td>@item.Season?.Name</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Детали</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Изменить</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Удалить</a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>

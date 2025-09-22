@@ -1,0 +1,28 @@
+services:
+  dalaproject:
+    build:
+      context: ./DalaProject       # путь к твоему .NET проекту
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"                  # HTTP
+      # - "8443:443"               # HTTPS отключен для разработки
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80        # слушать только HTTP
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=daladb;Username=postgres;Password=4554
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 4554
+      POSTGRES_DB: daladb
+    ports:
+      - "5433:5432"                # проброс на хост, чтобы можно подключиться извне (pgAdmin, DBeaver)
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

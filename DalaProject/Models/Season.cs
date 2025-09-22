@@ -9,13 +9,13 @@ namespace DalaProject.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.UtcNow;
         public DateTime? EndDate { get; set; }
 
         public int GroundId { get; set; }
-        public Ground Ground { get; set; } = null!;
+        public Ground? Ground { get; set; } = null!;
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
-        public ICollection<Report> Reports { get; set; } = new List<Report>();
+        public ICollection<Product>? Products { get; set; } = new List<Product>();
+        public ICollection<Report>? Reports { get; set; } = new List<Report>();
     }
 }

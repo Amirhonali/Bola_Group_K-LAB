@@ -1,19 +1,38 @@
 ﻿@model DalaProject.Models.Product
-@{
-    ViewData["Title"] = "Создать продукт";
-}
-<h2>@ViewData["Title"]</h2>
 
-<form asp-action="Create" method="post">
-    <div class="mb-3">
-        <label asp-for="Title" class="form-label"></label>
+@{
+    ViewData["Title"] = "Добавить продукт";
+}
+
+<h2>Добавить продукт</h2>
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label"></label>
+
+    <div class="form-group">
+        <label asp-for="Category"></label>
+        <input asp-for="Category" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
-    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+
+    <div class="form-group">
+        <label>Сезон</label>
+        <select asp-for="SeasonId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Seasons, "Id", "Name"))"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Фото</label>
+        <input type="file" name="imageFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
 </form>

@@ -4,6 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>bfdaf693-ee19-40ed-9889-57f8a62c8420</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
@@ -27,7 +29,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
@@ -37,6 +39,8 @@
     <None Remove="Services\Implementations\" />
     <None Remove="Profiles\" />
     <None Remove="DTOs\" />
+    <Content Remove="wwwroot\css\site.css" />
+    <Content Remove="wwwroot/favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -57,8 +61,5 @@
    <Folder Include="Views\Report\" />
    <Folder Include="Views\Seasons\" />
    <Folder Include="Views\Dashboard\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="Views\Company\Details.cshtml" />
   </ItemGroup>
 </Project>

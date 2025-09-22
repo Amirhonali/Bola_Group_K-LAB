@@ -9,7 +9,7 @@
     Вы уверены, что хотите удалить отчёт для <strong>@Model.Fermer?.FullName</strong> (сезон: @Model.Season?.Name)?
 </div>
 
-<form asp-action="DeleteConfirmed" method="post">
+<form asp-action="Delete" method="post">
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-danger">Удалить</button>
     <a asp-action="Index" class="btn btn-secondary">Отмена</a>

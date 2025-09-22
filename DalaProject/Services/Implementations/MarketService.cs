@@ -27,7 +27,6 @@ public class MarketService : IMarketService
             Price = dto.Price,
             Title = dto.Title,
             Description = dto.Description,
-            ImageUrl = "asdf",
             PublishDate = DateTime.UtcNow
         };
 
@@ -42,7 +41,6 @@ public class MarketService : IMarketService
             Price = mp.Price,
             Title = mp.Title,
             Description = mp.Description,
-            ImageUrl = mp.ImageUrl,
             Phone = dto.Phone,
             PublishDate = mp.PublishDate
         };
@@ -78,7 +76,6 @@ public class MarketService : IMarketService
             Price = mp.Price,
             Title = mp.Title,
             Description = mp.Description,
-            ImageUrl = mp.ImageUrl,
             Phone = mp.Fermer.Phone,
             PublishDate = mp.PublishDate
         });
@@ -96,7 +93,6 @@ public class MarketService : IMarketService
             Price = mp.Price,
             Title = mp.Title,
             Description = mp.Description,
-            ImageUrl = mp.ImageUrl,
             Phone = mp.Fermer.Phone,
             PublishDate = mp.PublishDate
         };
@@ -109,7 +105,6 @@ public class MarketService : IMarketService
         mp.Price = dto.Price;
         mp.Title = dto.Title;
         mp.Description = dto.Description;
-        mp.ImageUrl = dto.ImageUrl;
         await _db.SaveChangesAsync();
         return true;
     }
